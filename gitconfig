@@ -1,0 +1,13 @@
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  df = diff
+  pr = pull --rebase --stat
+[color]
+  ui = always
+[user]
+  name = Fco Javier Aceituno Lapido
+  mail = fco.javier.aceituno@gmail.com
+  email = fco.javier.aceituno@gmail.com

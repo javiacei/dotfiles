@@ -1,2 +1,4 @@
-vim/.netrwhist
-vim/.VimballRecord
+zsh/oh-my-zsh
+
+vim/bundle/*
+!vim/bundle/vundle

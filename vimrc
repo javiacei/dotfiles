@@ -1,207 +1,147 @@
-" based on http://github.com/jferris/config_files/blob/master/vimrc
+set nocompatible               " be iMproved
+filetype off                   " required!
+filetype plugin indent on      " required!
+set laststatus=2         " Always show the statusline
+set encoding=utf-8             " Necessary to show Unicode glyphs
+set t_Co=256                   " Explicitly tell Vim that the terminal supports 256 colors
+let mapleader = ','            " remap leader key to ,
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
-" allow backspacing over everything in insert mode
+set ttyfast
+set number
+set smartindent
 set backspace=indent,eol,start
-
-set nobackup
-set nowritebackup
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" This is an alternative that also works in block mode, but the deleted
-" text is lost and it only works for putting the current register.
-"vnoremap p "_dp
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-  set hlsearch
-endif
-
-" Switch wrap off for everything
-set nowrap
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Set File type to 'text' for files ending in .txt
-  autocmd BufNewFile,BufRead *.txt setfiletype text
-
-  " Enable soft-wrapping for text files
-  autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  " autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  " Automatically load .vimrc source when saved
-  autocmd BufWritePost .vimrc source $MYVIMRC
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-" if has("folding")
-  " set foldenable
-  " set foldmethod=syntax
-  " set foldlevel=1
-  " set foldnestmax=2
-  " set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
-" endif
-
-" Softtabs, 2 spaces
+set cindent
+set autoindent
+set expandtab
 set tabstop=2
 set shiftwidth=2
-set expandtab
-
-" Always display the status line
-set laststatus=2
-
-" \ is the leader character
-let mapleader = ","
-
-" Edit the README_FOR_APP (makes :R commands work)
-map <Leader>R :e doc/README_FOR_APP<CR>
-
-" Leader shortcuts for Rails commands
-map <Leader>m :Rmodel 
-map <Leader>c :Rcontroller 
-map <Leader>v :Rview 
-map <Leader>u :Runittest 
-map <Leader>f :Rfunctionaltest 
-map <Leader>tm :RTmodel 
-map <Leader>tc :RTcontroller 
-map <Leader>tv :RTview 
-map <Leader>tu :RTunittest 
-map <Leader>tf :RTfunctionaltest 
-map <Leader>sm :RSmodel 
-map <Leader>sc :RScontroller 
-map <Leader>sv :RSview 
-map <Leader>su :RSunittest 
-map <Leader>sf :RSfunctionaltest 
-
-" Hide search highlighting
-map <Leader>h :set invhls <CR>
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Opens a tab edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>t
-map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-" Duplicate a selection
-" Visual mode: D
-vmap D y'>p
-
-" Press Shift+P while in visual mode to replace the selection without
-" overwriting the default register
-vmap P p :call setreg('"', getreg('0')) <CR>
-
-" For Haml
-au! BufRead,BufNewFile *.haml         setfiletype haml
-
-" No Help, please
-nmap <F1> <Esc>
-
-" Press ^F from insert mode to insert the current file name
-imap <C-F> <C-R>=expand("%")<CR>
-
-" Maps autocomplete to tab
-imap <Tab> <C-N>
-
-imap <C-L> <Space>=><Space>
-
-" Display extra whitespace
-" set list listchars=tab:»·,trail:·
-
-" Edit routes
-command! Rroutes :e config/routes.rb
-command! Rschema :e db/schema.rb
-
-" Local config
-if filereadable(".vimrc.local")
-  source .vimrc.local
-endif
-
-" Use Ack instead of Grep when available
-if executable("ack")
-  set grepprg=ack\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
-endif
-
-" Color scheme
-" colorscheme vividchalk
-" highlight NonText guibg=#060606
-" highlight Folded  guibg=#0A0A0A guifg=#9090D0
-
-" Numbers
-set number
-set numberwidth=5
-
-" Snippets are activated by Shift+Tab
-let g:snippetsEmu_key = "<S-Tab>"
-
-" Tab completion options
-" (only complete to the longest unambiguous match, and show a menu)
-set completeopt=longest,menu
-set wildmode=list:longest,list:full
-set complete=.,t
-
-" case only matters with mixed case expressions
+set smarttab
+set noerrorbells    " do not beep like a crazy bitch
 set ignorecase
-set smartcase
+set cursorline
+set textwidth=120
+set nolazyredraw    " don't redraw screen while executing macros
+set synmaxcol=300   " stop rendering syntax colors in long lines (improves rendering performance)
+set ttyscroll=3     " improves redraw performance when scroll
+set encoding=utf-8
+set fileformat=unix " endline setted to \n
+set exrc            " enable per-directory .vimrc files
+set secure          " disable unsafe commands in local .vimrc files
+set incsearch       " find the next match as we type the search
+set hlsearch        " hilight searches by default
+set history=500     " store commands, search and marks between vim executions
 
-" Tags
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-set tags=./tags;
+au BufRead,BufNewFile *.twig setfiletype htmldjango
 
-let g:fuf_splitPathMatching=1
+" XML AutoFormat
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
-" Open URL
-command -bar -nargs=1 OpenURL :!open <args>
-function! OpenURL()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-  echo s:uri
-  if s:uri != ""
-	  exec "!open \"" . s:uri . "\""
-  else
-	  echo "No URI found in line."
-  endif
-endfunction
-map <Leader>w :call OpenURL()<CR>
+" folding options
+set foldmethod=syntax
+set foldlevel=0
+set foldcolumn=3
+let javaScript_fold=1
+let xml_syntax_folding=1
 
+" directories for .swp files
+set directory=~/.vim/swp//,/tmp//
+set tags+=tags;/ " search recursively upwards for the tags file
+set wildignore=**/cache/**,**/build/**,**/logs/**,**/vendor/**
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required! 
+Plugin 'gmarik/vundle'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/phpvim'
+Plugin 'godlygeek/tabular.git'
+Plugin 'majutsushi/tagbar'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'bling/vim-airline'
+Plugin 'mileszs/ack.vim'
+Plugin 'editorconfig/editorconfig-vim'
+
+" Themes
+syntax enable
+set background=dark
+colorscheme Tomorrow-Night-Eighties
+
+" Ctrlp
+let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
+if executable('ag')
+    let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+elseif executable('ack-grep')
+    let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
+elseif executable('ack')
+    let s:ctrlp_fallback = 'ack %s --nocolor -f'
+else
+    let s:ctrlp_fallback = 'find %s -type f'
+endif
+
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+    \ 'fallback': s:ctrlp_fallback
+\ }
+
+" NERDTree
+map <c-e> :NERDTreeToggle<CR>
+
+" PHP for Vim
+let php_sql_query = 1
+let php_htmlInStrings = 1
+let php_parent_error_close = 1
+let php_folding = 3
+let php_baselib = 1
+let php_special_vars = 1
+
+" Tagbar
+map <F2> :TagbarToggle<CR>
+let g:tagbar_iconchars = ['▾', '▸']
+let g:tagbar_foldlevel = 1
+let g:tagbar_autofocus = 1
+
+
+" vim-airline {
+    " Set configuration options for the statusline plugin vim-airline.
+    " Use the powerline theme and optionally enable powerline symbols.
+    " To use the symbols , , , , , , and .in the statusline
+    " segments add the following to your .vimrc.before.local file:
+    "   let g:airline_powerline_fonts=1
+    let g:airline_powerline_fonts=1
+
+    " If the previous symbols do not render for you then install a
+    " powerline enabled font.
+
+    " See `:echo g:airline_theme_map` for some more choices
+    " Default in terminal vim is 'dark'
+    if isdirectory(expand("~/.vim/bundle/vim-airline/"))
+        if !exists('g:airline_theme')
+            let g:airline_theme = 'tomorrow'
+        endif
+        if !exists('g:airline_powerline_fonts')
+            " Use the default set of separators with a few customizations
+            let g:airline_left_sep='›'  " Slightly fancier than '>'
+            let g:airline_right_sep='‹' " Slightly fancier than '<'
+        endif
+    endif
+"" }
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
