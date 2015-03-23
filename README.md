@@ -1,4 +1,4 @@
-# Francisco Javier Aceituno Dot Files
+# Personal Dot Files
 
 ## Installation
 
