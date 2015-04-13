@@ -1,4 +1,2 @@
-zsh/oh-my-zsh
-
 vim/bundle/*
-!vim/bundle/vundle
+!vim/bundle/Vundle.vim
