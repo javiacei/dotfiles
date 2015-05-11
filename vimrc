@@ -66,6 +66,7 @@ Plugin 'FuzzyFinder'
 Plugin 'bling/vim-airline'
 Plugin 'mileszs/ack.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Themes
 syntax enable
