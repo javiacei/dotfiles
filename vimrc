@@ -33,6 +33,8 @@ set history=500     " store commands, search and marks between vim executions
 
 au BufRead,BufNewFile *.twig setfiletype htmldjango
 
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
 " XML AutoFormat
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
@@ -66,6 +68,8 @@ Plugin 'FuzzyFinder'
 Plugin 'bling/vim-airline'
 Plugin 'mileszs/ack.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'othree/yajs.vim'
 
 " Themes
 syntax enable

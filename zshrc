@@ -9,3 +9,6 @@ export EDITOR=vim
 source $ZSH/oh-my-zsh.sh
 
 eval "$(rbenv init -)"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
