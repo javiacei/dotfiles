@@ -1,7 +1,7 @@
 ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 ZSH_THEME="robbyrussell"
 
-plugins=(git bundler brew gem)
+plugins=(git bundler brew gem docker docker-compose)
 
 export PATH="/usr/local/bin:$HOME/.rbenv/bin:$PATH"
 export EDITOR=vim

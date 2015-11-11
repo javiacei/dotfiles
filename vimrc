@@ -70,11 +70,13 @@ Plugin 'mileszs/ack.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'othree/yajs.vim'
+Plugin 'tomasr/molokai'
 
 " Themes
 syntax enable
 set background=dark
-colorscheme Tomorrow-Night-Eighties
+" colorscheme Tomorrow-Night-Eighties
+colorscheme molokai
 
 " Ctrlp
 let g:ctrlp_map = '<Leader>t'
