@@ -50,27 +50,26 @@ set directory=~/.vim/swp//,/tmp//
 set tags+=tags;/ " search recursively upwards for the tags file
 set wildignore=**/cache/**,**/build/**,**/logs/**,**/vendor/**
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle
 " required! 
-Plugin 'gmarik/vundle'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/phpvim'
-Plugin 'godlygeek/tabular.git'
-Plugin 'majutsushi/tagbar'
-Plugin 'L9'
-Plugin 'FuzzyFinder'
-Plugin 'bling/vim-airline'
-Plugin 'mileszs/ack.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'othree/yajs.vim'
-Plugin 'tomasr/molokai'
+Plug 'gmarik/vundle'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/phpvim'
+Plug 'godlygeek/tabular.git'
+Plug 'majutsushi/tagbar'
+Plug 'L9'
+Plug 'FuzzyFinder'
+Plug 'bling/vim-airline'
+Plug 'mileszs/ack.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'othree/yajs.vim'
+Plug 'tomasr/molokai'
 
 " Themes
 syntax enable
@@ -148,6 +147,6 @@ let g:tagbar_autofocus = 1
     endif
 "" }
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Add plugins to &runtimepath
+call plug#end()
 filetype plugin indent on    " required
