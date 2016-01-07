@@ -70,6 +70,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'othree/yajs.vim'
 Plug 'tomasr/molokai'
+Plug 'shime/vim-livedown'
 
 " Themes
 syntax enable
