@@ -60,7 +60,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/phpvim'
-Plug 'godlygeek/tabular.git'
+Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'L9'
 Plug 'FuzzyFinder'
@@ -71,6 +71,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'othree/yajs.vim'
 Plug 'tomasr/molokai'
 Plug 'shime/vim-livedown'
+Plug 'scrooloose/syntastic'
 
 " Themes
 syntax enable
@@ -147,6 +148,18 @@ let g:tagbar_autofocus = 1
         endif
     endif
 "" }
+
+" syntastic {
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+" }
 
 " Add plugins to &runtimepath
 call plug#end()
