@@ -1,3 +1,37 @@
+# React
+snippet repre
+import React from 'react';
+
+const ${1:ClassName} = () => (
+	${2:<h1>Hello world</h1>}
+);
+
+export default $1;
+endsnippet
+
+snippet recon
+import React, { Component, PropTypes } from 'react';
+
+const propTypes = {
+	${1}
+};
+
+const defaultProps = {
+	${2}
+}
+
+class ${3:ClassName} extends Component {
+	render() {
+		${4:return <h1>Hello world</h1>};
+	}
+}
+
+$3.propTypes = propTypes;
+$3.defaultProps = defaultProps;
+
+export default $3;
+endsnippet
+
 # Redux
 snippet rere
 export default function ${1}(state = {
