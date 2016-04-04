@@ -1,0 +1,34 @@
+# Redux
+snippet rere
+export default function ${1}(state = {
+	${2}
+}, action) {
+	switch (action.type) {
+		default:
+			return state;
+	}
+}
+endsnippet
+
+snippet rea
+export function ${1}(${2}) {
+	return {
+		type: ${3},
+		payload: ${4},
+	};
+}
+endsnippet
+
+snippet reaa
+export function ${1}(${2}) {
+	return dispatch => {
+		dispatch(${3});
+
+		return ${4}.then(${5} => {
+			dispatch(${6});
+		}).catch(error => {
+			dispatch(${7});
+		});
+	};
+}
+endsnippet
