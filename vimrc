@@ -74,6 +74,8 @@ Plug 'shime/vim-livedown'
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'tobyS/vmustache'
+Plug 'tobyS/pdv'
 
 " Themes
 syntax enable
@@ -164,13 +166,18 @@ let g:tagbar_autofocus = 1
 " }
 
 " ultisnips {
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<tab>"
   let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="vertical"
+" }
+
+" pdv {
+  let g:pdv_template_dir = $HOME ."/.vim/pdv/templates_snip"
+  map <Leader>p :call pdv#DocumentWithSnip()<CR>
 " }
 
 " Add plugins to &runtimepath
