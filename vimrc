@@ -39,11 +39,9 @@ autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " folding options
-set foldmethod=syntax
-set foldlevel=0
-set foldcolumn=3
-let javaScript_fold=1
-let xml_syntax_folding=1
+filetype plugin indent on
+syntax on
+autocmd Filetype * AnyFoldActivate
 
 " directories for .swp files
 set directory=~/.vim/swp//,/tmp//
@@ -55,32 +53,24 @@ call plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle
 " required! 
 Plug 'gmarik/vundle'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'tpope/vim-fugitive'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/phpvim'
 Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar'
 Plug 'L9'
-Plug 'FuzzyFinder'
-Plug 'bling/vim-airline'
 Plug 'mileszs/ack.vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'othree/yajs.vim'
 Plug 'tomasr/molokai'
-Plug 'shime/vim-livedown'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/syntastic'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'tobyS/vmustache'
-Plug 'tobyS/pdv'
+Plug 'nvie/vim-flake8'
+Plug 'moll/vim-node'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'pseewald/vim-anyfold'
 
 " Themes
 syntax enable
 set background=dark
-" colorscheme Tomorrow-Night-Eighties
 colorscheme molokai
 
 " Ctrlp
@@ -113,46 +103,6 @@ let g:ctrlp_user_command = {
 " NERDTree
 map <c-e> :NERDTreeToggle<CR>
 
-" PHP for Vim
-let php_sql_query = 1
-let php_htmlInStrings = 1
-let php_parent_error_close = 1
-let php_folding = 3
-let php_baselib = 1
-let php_special_vars = 1
-
-" Tagbar
-map <F2> :TagbarToggle<CR>
-let g:tagbar_iconchars = ['▾', '▸']
-let g:tagbar_foldlevel = 1
-let g:tagbar_autofocus = 1
-
-
-" vim-airline {
-    " Set configuration options for the statusline plugin vim-airline.
-    " Use the powerline theme and optionally enable powerline symbols.
-    " To use the symbols , , , , , , and .in the statusline
-    " segments add the following to your .vimrc.before.local file:
-    "   let g:airline_powerline_fonts=1
-    let g:airline_powerline_fonts=1
-
-    " If the previous symbols do not render for you then install a
-    " powerline enabled font.
-
-    " See `:echo g:airline_theme_map` for some more choices
-    " Default in terminal vim is 'dark'
-    if isdirectory(expand("~/.vim/bundle/vim-airline/"))
-        if !exists('g:airline_theme')
-            let g:airline_theme = 'tomorrow'
-        endif
-        if !exists('g:airline_powerline_fonts')
-            " Use the default set of separators with a few customizations
-            let g:airline_left_sep='›'  " Slightly fancier than '>'
-            let g:airline_right_sep='‹' " Slightly fancier than '<'
-        endif
-    endif
-"" }
-
 " syntastic {
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
@@ -163,21 +113,6 @@ let g:tagbar_autofocus = 1
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%*
-" }
-
-" ultisnips {
-  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
-" }
-
-" pdv {
-  let g:pdv_template_dir = $HOME ."/.vim/pdv/templates_snip"
-  map <Leader>p :call pdv#DocumentWithSnip()<CR>
 " }
 
 " Add plugins to &runtimepath
